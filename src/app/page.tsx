@@ -4,6 +4,10 @@ import './page.sass'
 
 import {useEffect} from "react";
 import axios from "axios";
+// @ts-ignore
+import {Home} from 'lucide-react';
+import Card from "@/app/Card";
+
 
 export default function Home() {
 
@@ -16,33 +20,51 @@ export default function Home() {
             return axios.get('https://api.github.com/repos/CursedNet/CursedWeb/issues');
         }
 
-        function getCursedNet() {
+        function getCursedNetRepos() {
             return axios.get('https://api.github.com/orgs/CursedNet/repos');
         }
+        function getCursedNet() {
+            return axios.get('https://api.github.com/orgs/CursedNet');
+        }
 
-        /*
-                Promise.all([getCursedNet()])
+
+                Promise.all([getCursedNet(), getCursedNetRepos()])
                     .then(function (results: any) {
                         for (let k = 0; k < 3; k++) {
-                            console.log(results[0].data[k].name)
+                            let card: any = document.getElementById('card_fetch')
+                            console.log()
+                            card.insertAdjacentHTML('afterbegin', `
+                                <a href="${results[1].data[k].html_url}">
+                                    <li class='list'>
+                                        <div class='content_list'>
+                                            <img src="${results[0].data.avatar_url}" width="30"/>
+                                            <div class='font_sidebar'>
+                                                &nbsp;&nbsp;${results[1].data[k].name}
+                                            </div>
+                                        </div>
+                                    </li>
+                                </a>
+                                    `)
 
-                            fetch(`https://api.github.com/repos/CursedNet/${results[0].data[k].name}/issues`)
+
+                            fetch(`https://api.github.com/repos/CursedNet/${results[1].data[k].name}/issues`)
                                 .then((response) => {
                                     return response.json();
                                 })
-                                .catch(() => {console.log(error)})
+                                .catch(() => {console.log("error")})
                                 .then((results) => {
-                                    console.log(results[k].title)
-                                    console.log(results[k])
+
                                 })
+
                         }
                     })
-         */
+
+
 
         Promise.all([getTaskBoard(), getCursedWeb()])
             .then(function (results) {
 
-                let block: any = document.getElementById('id2')
+                let block: any = document.getElementById('card_block')
 
                 for (let v = 0; v < results.length; v++) {
                     for (let c = 0; c < results[v].data.length; c++) {
@@ -60,6 +82,7 @@ export default function Home() {
                             'Development': '3e6f47',
                             'Error': 'B22222'
                         };
+
 
                         const regExp = /\*|Full-stack: |Back-end: |Front-end: |NoBilling: |Development: |Database: |UX\/UI: |:\$/g;
 
@@ -174,16 +197,66 @@ export default function Home() {
 
                 }
 
-            });
-
+            })
     }, []);
 
 
     return (
-        <div className="grid">
-            <div id="id1"></div>
+        <div className='home'>
+            <div className='sidebar'>
+                <div className='sidebar_content'>
+                    <div className='border_list'>
+                        <ul className='list_content'>
+                            <li className='list'>
+                                <div className='content_list'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"
+                                         strokeLinejoin="round"
+                                         className="lucide lucide-home">
+                                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                        <polyline points="9 22 9 12 15 12 15 22"/>
+                                    </svg>
+                                    <div className='font_sidebar'>
+                                        &nbsp;&nbsp;Home
+                                    </div>
+                                </div>
+                            </li>
+                            <li className='list'>
+                                <div className='content_list'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                                         strokeLinejoin="round" className="lucide lucide-building-2">
+                                        <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/>
+                                        <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/>
+                                        <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/>
+                                        <path d="M10 6h4"/>
+                                        <path d="M10 10h4"/>
+                                        <path d="M10 14h4"/>
+                                        <path d="M10 18h4"/>
+                                    </svg>
+                                    <div className='font_sidebar'>
+                                        &nbsp;&nbsp;Company
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className='border_list'>
+                        <ul className='list_content'>
+                            <div className='list_specification'>
+                                Projects
+                            </div>
+                            <div id='card_fetch'>
 
-            <div className="grid" id='id2'></div>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div className="container">
+                <div className='grid_content' id='card_block'></div>
+            </div>
         </div>
     )
 }
