@@ -1,8 +1,5 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import {Octokit} from "octokit";
-
-
 import Authorization from "@/Authorization";
 const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
