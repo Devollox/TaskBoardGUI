@@ -1,0 +1,56 @@
+{
+  "name": "taskboard",
+  "productName": "taskboard",
+  "version": "1.0.0",
+  "description": "TaskBoardUI",
+  "main": "src/index.jsx",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": "Devollox",
+  "license": "MIT",
+  "dependencies": {
+    "ajax": "^0.0.4",
+    "axios": "^1.6.2",
+    "electron-squirrel-startup": "^1.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.69.5",
+    "update-electron-app": "^3.0.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.1.0",
+    "@electron-forge/maker-deb": "^7.1.0",
+    "@electron-forge/maker-rpm": "^7.1.0",
+    "@electron-forge/maker-squirrel": "^7.1.0",
+    "@electron-forge/maker-zip": "^7.1.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.1.0",
+    "@electron-forge/plugin-webpack": "^7.1.0",
+    "@types/react": "^18.2.38",
+    "@types/react-dom": "^18.2.17",
+    "electron": "27.1.2"
+  },
+  "build": {
+    "productName": "TaskBoard",
+    "appId": "fun.taskbord.taskboard",
+    "linux": {
+      "target": "AppImage",
+      "category": "Utility",
+      "icon": "src/favicon.ico"
+    },
+    "files": [
+      "src/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "build"
+    }
+  }
+}
