@@ -1,6 +1,8 @@
 {
   "name": "taskboard",
+  "icon": "./src/favicon.ico",
   "productName": "taskboard",
+  "productIcon": "./src/favicon.ico",
   "version": "1.0.0",
   "description": "TaskBoardUI",
   "main": "src/index.jsx",
@@ -41,8 +43,17 @@
     "linux": {
       "target": "AppImage",
       "category": "Utility",
-      "icon": "src/favicon.ico"
+      "icon": "favicon.ico"
     },
+    "win": {
+      "icon": "favicon.ico"
+    },
+    "windows": {
+      "target": "AppImage",
+      "category": "Utility",
+      "icon": "favicon.ico"
+    },
+
     "files": [
       "src/**/*",
       "node_modules/**/*",
